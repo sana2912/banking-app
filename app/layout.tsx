@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css"
+import logo from '../public/spotify_logo.png';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const main_font = IBM_Plex_Sans_Thai({
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: "sana bank",
   description: "sana banking testing project",
   icons: {
-    icon: '/icon/logo.svg'
+    icon: logo.src
   }
 };
 
