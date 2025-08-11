@@ -1,8 +1,14 @@
-function Sign_up() {
+import Form_component from "@/components/form_component"
+import { getLoggedInUser } from "@/lib/server/user_actions";
+async function Sign_up() {
+    const user = await getLoggedInUser();
+    console.log(user);
     return (
-        <div>
-            <h1>singUp page</h1>
-        </div>
+        <section className="flex-center mx-auto mt-4 w-100">
+            <Form_component
+                auth={'sign up'}
+            />
+        </section>
     )
 }
-export default Sign_up
+export default Sign_up;

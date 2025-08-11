@@ -2,6 +2,8 @@
 import { type ClassValue, clsx } from "clsx";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
+import { email, z } from "zod";
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -193,3 +195,23 @@ export const getTransactionStatus = (date: Date) => {
 
   return date > twoDaysAgo ? "Processing" : "Success";
 };
+export const authformSchema = (auth: string) => z.object({
+  // sign up section
+  firstName: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your fisrt name is too shot" }).max(30, { message: 'your first name is too long' }),
+  lastName: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your fisrt name is too shot" }).max(30, { message: 'your first name is too long' }),
+  state: auth === 'sign in' ? z.string().optional() : z.string().min(2, { message: "your country is too shot" }).max(30, { message: 'your country is too long' }),
+  address1: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your address is too shot" }).max(30, { message: 'your address is too long' }),
+  city: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your city name is too shot" }).max(30, { message: 'your city name is too long' }),
+  postalCode: auth === 'sign in' ? z.string().optional() : z.string().min(6, { message: "your postal code is too shot" }).max(6, { message: 'your postal code is too long' }),
+  dateOfBirth: auth === 'sign in' ? z.string().optional() : z.string().min(10, { message: "your birthday not cuurect format" }).max(10, { message: 'your birth day not currect format' }),
+  ssn: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your ssn is too shot" }).max(30, { message: 'your ssn is too long' }),
+  email: z.string().email({ message: 'your email is incurrect' }),
+  // login section
+  password: z.string()
+    .min(6, {
+      message: "your must have least 6 letter"
+    })
+    .max(10, {
+      message: 'your password can not over 10 letter'
+    })
+})

@@ -9,14 +9,14 @@ export default function BankCards({ account, userName, showBalance }: CreditCard
             {/* infomation side */}
             <div className="high-full w-6/8 flex flex-col justify-between p-2">
                 <div className="flex flex-col gap-2">
-                    <h2 className="text-[12px] font-medium text-white lg:text-[16px]">{account.officialName}</h2>
+                    <h2 className="text-[12px] font-medium text-white lg:text-[16px]">{userName}</h2>
                     {showBalance && (
                         <h2 className="text-[12px] font-medium text-white lg:text-[16px]">${account.currentBalance}</h2>
                     )}
                 </div>
                 <div className="flex flex-col gap-2">
                     <div className="flex justify-between">
-                        <h2 className="text-[8px] font-medium text-white lg:text-[12px]">{account.officialName}</h2>
+                        <h2 className="text-[8px] font-medium text-white lg:text-[12px]">{userName}</h2>
                         <h2 className="text-[8px] font-medium text-white lg:text-[12px]">***/***</h2>
                     </div>
                     <h2 className="text-[12px] font-medium text-white lg:text-[16px]">

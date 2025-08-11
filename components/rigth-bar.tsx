@@ -30,7 +30,7 @@ export default function Right_side_bar({ user, banks, transactions }: RightSideb
                     </div>
                 </div>
                 <div className="flex flex-col mt-10 px-6">
-                    <h1 className="text-sm font-bold lg:text-xl">{user.firstName}</h1>
+                    <h1 className="text-sm font-bold lg:text-xl">{user.name}</h1>
                     <p className="text-[8px]text-neutral-500 lg:text-sm">{user.email}</p>
                 </div>
             </section>
@@ -55,7 +55,7 @@ export default function Right_side_bar({ user, banks, transactions }: RightSideb
                             <div className="absolute w-50 h-30 z-10 lg:w-70 lg:h-45">
                                 <BankCards
                                     account={mocking}
-                                    userName={user.firstName}
+                                    userName={user.name}
                                     showBalance={true}
                                 />
                             </div>
@@ -63,7 +63,7 @@ export default function Right_side_bar({ user, banks, transactions }: RightSideb
                                 <div className="absolute w-50h-30 top-5 left-10 lg:w-70 lg:h-45">
                                     <BankCards
                                         account={mocking}
-                                        userName={user.firstName}
+                                        userName={user.name}
                                         showBalance={true}
                                     />
                                 </div>

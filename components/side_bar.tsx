@@ -4,11 +4,13 @@ import logo from '../public/spotify_logo.png'
 import { sidebarLinks } from '@/constants'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Logout_field from './logout_field'
 
 export default function SideBar({ user }: SiderbarProps) {
     const pathname = usePathname();
+    console.log(user.name);
     return (
-        <div className='h-full flex flex-col justify-between p-5'>
+        <div className='h-full flex flex-col justify-between p-2'>
             <div>
                 <div className='flex gap-2 items-end'>
                     <Image
@@ -43,12 +45,16 @@ export default function SideBar({ user }: SiderbarProps) {
                             )
                         })
                     }
-                    USER
                 </nav>
             </div >
-            <footer>
-                FOOTER
-            </footer>
+            {user.name === 'none-user' ?
+                ""
+                :
+                <Logout_field
+                    user={user}
+                    type='desktop'
+                />
+            }
         </div >
     )
 }

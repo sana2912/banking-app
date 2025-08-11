@@ -2,11 +2,17 @@ import SideBar from '@/components/side_bar';
 import '../globals.css'
 import MobileMenu from '@/components/mobile-menu';
 import logo from '../../public/spotify_logo.png'
-export default function RootLayout({
+import { getLoggedInUser } from '@/lib/server/user_actions';
+import { redirect } from 'next/navigation';
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const user_login = await getLoggedInUser();
+    if (!user_login) {
+        redirect('/sign-in');
+    };
     const user_data = {
         $id: "1996",
         email: "sana@gmail.com",
@@ -15,7 +21,7 @@ export default function RootLayout({
         dwollaCustomerId: "dpspodpds",
         firstName: "sana",
         lastName: "minatozaki",
-        name: "sana",
+        name: user_login ? user_login.name : "none-user",
         address1: "12/japan",
         city: "souel",
         state: "korea",
@@ -30,9 +36,9 @@ export default function RootLayout({
                     user={user_data}
                 />
             </div>
-            <div className='flex flex-col w-full md:w-13/14 lg:w-12/14'>
+            <div className='flex flex-col md:w-13/14 lg:w-12/14'>
                 <div className='block w-full md:hidden'>
-                    <nav className="flex justify-between p-2 h-14">
+                    <nav className="flex justify-between h-14">
                         <img className="bg-indigo-100 rounded-full" src={logo.src} />
                         <MobileMenu user={user_data} />
                     </nav>

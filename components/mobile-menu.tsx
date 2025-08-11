@@ -15,6 +15,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import Image from "next/image"
+import Logout_field from "./logout_field"
 
 export default function MobileMenu({ user }: MobileNavProps) {
     const pathname = usePathname();
@@ -58,9 +59,12 @@ export default function MobileMenu({ user }: MobileNavProps) {
                             })
                         }
                     </SheetHeader>
-                    <footer>
-                        FOOTER
-                    </footer>
+                    <div className="flex p-6">
+                        <Logout_field
+                            user={user}
+                            type="mobile"
+                        />
+                    </div>
                 </SheetContent>
             </Sheet>
         </div>
