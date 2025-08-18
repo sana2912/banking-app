@@ -3,32 +3,55 @@ import { NextResponse } from "next/server";
 import { ID } from "node-appwrite";
 import { createAdminClient } from "@/lib/server/appwrite";
 import { parseStringify } from "@/lib/utils";
+const {
+    APPWRITE_DATABASE_ID,
+    APPWRITE_USER_COLLECTION_ID,
+} = process.env;
+import { createDwollaCustomer } from "@/lib/server/dwolla";
+import { extractCustomerIdFromUrl } from "@/lib/utils";
 
 export async function POST(request: Request) {
     try {
+        let newUserAccount;
         const user_data = await request.json();
         const { firstName, lastName, email, password } = user_data;
 
-        const { account } = await createAdminClient();
+        const { account, database } = await createAdminClient();
 
-        // สร้าง user ใหม่
-        const new_user_account = await account.create(
+        newUserAccount = await account.create(
             ID.unique(),
             email,
             password,
             `${firstName} ${lastName}`
         );
 
-        // สร้าง session login
-        const session = await account.createEmailPasswordSession(email, password);
+        if (!newUserAccount) throw new Error('Error creating user')
 
-        // สร้าง cookie
+        const dwollaCustomerUrl = await createDwollaCustomer({
+            ...user_data,
+            type: 'personal'
+        })
+
+        if (!dwollaCustomerUrl) throw new Error('Error creating Dwolla customer')
+
+        const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+
+        const newUser = await database.createDocument(
+            APPWRITE_DATABASE_ID!,
+            APPWRITE_USER_COLLECTION_ID!,
+            ID.unique(),
+            {
+                ...user_data,
+                userId: newUserAccount.$id,
+                dwollaCustomerId,
+                dwollaCustomerUrl
+            }
+        )
+        const session = await account.createEmailPasswordSession(email, password);
         const response = NextResponse.json({
             message: "User created",
-            user: parseStringify(new_user_account),
+            user: parseStringify(newUser),
         });
-
-        // ตั้ง cookie ใน response
         response.cookies.set("my-custom-session", session.secret, {
             path: "/",
             httpOnly: true,

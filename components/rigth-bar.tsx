@@ -3,19 +3,7 @@ import adding_btn from '../public/icons/plus.svg';
 import BankCards from "./bank_card";
 
 // mocking accoutn data 
-const mocking: Account = {
-    id: "momohirai",
-    availableBalance: 26565600,
-    currentBalance: 500000,
-    officialName: "momo hirai",
-    mask: "56566s6s",
-    institutionId: "4664fs6fs",
-    name: "momo",
-    type: "debit card",
-    subtype: "debit",
-    appwriteItemId: "deuuuhu22323",
-    sharableId: "jht54646hth",
-};
+
 
 export default function Right_side_bar({ user, banks, transactions }: RightSidebarProps) {
     return (
@@ -30,7 +18,7 @@ export default function Right_side_bar({ user, banks, transactions }: RightSideb
                     </div>
                 </div>
                 <div className="flex flex-col mt-10 px-6">
-                    <h1 className="text-sm font-bold lg:text-xl">{user.name}</h1>
+                    <h1 className="text-sm font-bold lg:text-xl">{user.firstName}</h1>
                     <p className="text-[8px]text-neutral-500 lg:text-sm">{user.email}</p>
                 </div>
             </section>
@@ -50,21 +38,21 @@ export default function Right_side_bar({ user, banks, transactions }: RightSideb
                 </div>
                 {/* card div */}
                 <div>
-                    {true && (
+                    {banks.length > 0 && (
                         <div className="relative flex w-80 h-50 justify-center items-center">
                             <div className="absolute w-50 h-30 z-10 lg:w-70 lg:h-45">
                                 <BankCards
-                                    account={mocking}
-                                    userName={user.name}
-                                    showBalance={true}
+                                    account={banks[0]}
+                                    userName={`${user.firstName} ${user.lastName}`}
+                                    showBalance={false}
                                 />
                             </div>
-                            {true && (
+                            {banks.length > 1 && (
                                 <div className="absolute w-50h-30 top-5 left-10 lg:w-70 lg:h-45">
                                     <BankCards
-                                        account={mocking}
-                                        userName={user.name}
-                                        showBalance={true}
+                                        account={banks[1]}
+                                        userName={`${user.firstName} ${user.lastName}`}
+                                        showBalance={false}
                                     />
                                 </div>
                             )}

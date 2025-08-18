@@ -14,6 +14,7 @@ import {
 import Form_reuse from "./reusable_form";
 import { authformSchema } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import Plaid_Link from "./plaidLink";
 
 
 
@@ -59,8 +60,7 @@ export default function Form_component({ auth }: { auth: string }) {
                 }
 
                 const data = await response.json();
-                console.log(data);
-                set_user(data);
+                set_user(data.user);
             }
 
             if (auth === 'sign in') {
@@ -81,7 +81,6 @@ export default function Form_component({ auth }: { auth: string }) {
                     throw new Error(errorData.error || "Signup failed");
                 }
                 const data = await response.json();
-                console.log(data);
                 set_user(data);
                 //if (response) router.push('/');
             }
@@ -122,9 +121,14 @@ export default function Form_component({ auth }: { auth: string }) {
                 }
             </header>
             {/* not login need to login section */}
-            <div>
+            <div className="flex flex-col gap-4">
                 {user ?
-                    <Link className="text-sm text-sky-600 font-medium cursor-pointer hover:text-sky-700" href='/'>go to your dahboard</Link>
+                    <div className="flex flex-col">
+                        <Plaid_Link
+                            user={user!}
+                            variant="primary"
+                        />
+                    </div>
                     :
                     <div className="flex flex-col">
                         <Form {...form}>

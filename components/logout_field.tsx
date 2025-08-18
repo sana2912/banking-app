@@ -14,9 +14,9 @@ export default function Logout_field({ user, type = 'desktop' }: FooterProps) {
     return (
         <footer className='flex w-full items-center justify-between'>
             <div className='flex gap-2 justify-center items-center'>
-                <div className='flex w-5 h-5 bg-indigo-400 text-white rounded-full items-center justify-center text-4xl font-bold '>{user.name[0]}</div>
+                <div className='flex w-5 h-5 bg-indigo-400 text-white rounded-full items-center justify-center'>{user.firstName[0]}</div>
                 <div className='flex flex-col'>
-                    <h1 className='text-[16px] text-neutral-900s font-medium'>{user.name}</h1>
+                    <h1 className='text-[16px] text-neutral-900s font-medium'>{`${user.firstName} ${user.lastName}`}</h1>
                     <h2 className='text-[12px] text-neutral-800'>{user.email}</h2>
                 </div>
             </div>

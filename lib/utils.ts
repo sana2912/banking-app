@@ -202,7 +202,7 @@ export const authformSchema = (auth: string) => z.object({
   state: auth === 'sign in' ? z.string().optional() : z.string().min(2, { message: "your country is too shot" }).max(30, { message: 'your country is too long' }),
   address1: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your address is too shot" }).max(30, { message: 'your address is too long' }),
   city: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your city name is too shot" }).max(30, { message: 'your city name is too long' }),
-  postalCode: auth === 'sign in' ? z.string().optional() : z.string().min(6, { message: "your postal code is too shot" }).max(6, { message: 'your postal code is too long' }),
+  postalCode: auth === 'sign in' ? z.string().optional() : z.string().min(5, { message: "your postal code is too shot" }).max(5, { message: 'your postal code is too long' }),
   dateOfBirth: auth === 'sign in' ? z.string().optional() : z.string().min(10, { message: "your birthday not cuurect format" }).max(10, { message: 'your birth day not currect format' }),
   ssn: auth === 'sign in' ? z.string().optional() : z.string().min(3, { message: "your ssn is too shot" }).max(30, { message: 'your ssn is too long' }),
   email: z.string().email({ message: 'your email is incurrect' }),

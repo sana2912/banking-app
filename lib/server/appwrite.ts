@@ -26,9 +26,7 @@ export async function createSessionClient(): Promise<SessionClientResult> {
         if (!session?.value) {
             return result; // stays loggedIn: false
         }
-
         client.setSession(session.value);
-
         result.loggedIn = true;
         result.account = new Account(client);
 

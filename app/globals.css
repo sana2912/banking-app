@@ -3,4 +3,12 @@
 
 @tailwind utilities;
 
-@layer utilities {}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.input-class:focus {
+    outline: none;
+    box-shadow: none;
+    /* กันไม่ให้มี shadow focus ของ shadcn ด้วย */
+}

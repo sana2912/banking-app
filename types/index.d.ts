@@ -77,7 +77,7 @@ declare type Transaction = {
   image: string;
   type: string;
   $createdAt: string;
-  channel: string;
+  chanel: string;
   senderBankId: string;
   receiverBankId: string;
 };
