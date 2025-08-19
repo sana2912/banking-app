@@ -10,7 +10,6 @@ import {
 import { formatAmount, formatDateTime, getTransactionStatus, removeSpecialCharacters } from "@/lib/utils"
 
 export default function TransactionTable({ transactions }: TransactionTableProps) {
-    console.log("data at frontent", transactions);
     return (
         <div className="mt-6 w-full">
             <Table className="w-full">

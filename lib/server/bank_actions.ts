@@ -77,7 +77,6 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
         const transferTransactionsData = await getTransactionsByBankId({
             bankId: bank.$id,
         });
-        console.log("get transfer dqata from database : ", transferTransactionsData.documents);
         const transferTransactions = transferTransactionsData.documents.map(
             (transferData: Transaction) => ({
                 id: transferData.$id,

@@ -174,8 +174,6 @@ async function createBankAccount({
 
 export const getBanks = async ({ userId }: getAccountsProps) => {
     try {
-        console.log('access APPWRITE_BANK_COLLECTION_ID');
-        console.log(userId);
         const { database } = await createAdminClient();
         const bank_list = database.listDocuments(
             APPWRITE_DATABASE_ID!,

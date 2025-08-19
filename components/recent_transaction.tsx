@@ -8,15 +8,20 @@ import {
 import { BankTabItem } from "./bank_tabs";
 import BankInfo from "./account_info";
 import TransactionTable from "./transactionsTable";
+import { Pagination } from "./pagination";
 
 export default function RecenTransaction(
     {
         accounts,
         appwriteItemId,
-        page,
+        page = 1,
         transactions
     }: RecentTransactionsProps) {
-    console.log("page :", page);
+    const row_per_page = 5;
+    const all_pages = Math.ceil(transactions.length / row_per_page);
+    const index_of_end_page_elenemt = row_per_page * page;
+    const index_of_previouse_page_element = index_of_end_page_elenemt - row_per_page;
+    const current_transactions_element = transactions.slice(index_of_previouse_page_element, index_of_end_page_elenemt);
     return (
         <section className="mt-8 flex flex-col gap-4">
             <header className="flex items-center justify-between px-8">
@@ -50,12 +55,18 @@ export default function RecenTransaction(
                                     type="card"
                                 />
                                 <TransactionTable
-                                    transactions={transactions}
+                                    transactions={current_transactions_element}
                                 />
                             </TabsContent>
                         )
                     })}
                 </Tabs>
+            </div>
+            <div className="px-8">
+                <Pagination
+                    page={page}
+                    totalPages={all_pages}
+                />
             </div>
         </section>
     )
